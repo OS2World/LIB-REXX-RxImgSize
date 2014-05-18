@@ -1,0 +1,1483 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta content="text/html;charset=IBM850" http-equiv="Content-Type">
+  <meta name="author" content="Jan-Erik L„rka">
+  <meta name="description" content="Support library for REXX">
+  <meta name="generator" content="VyperHelp 1.11">
+  <meta name="generator"
+ content="Mozilla/4.61 [en] (OS/2; U) [Netscape]">
+  <meta name="generator"
+ content="KompoZer version 0.8b4pre 20100331 (OS/2 and eComStation)">
+  <title>Raster Image Support for REXX</title>
+</head>
+<body>
+<h1>RxImgSze: Raster Image Support for REXX
+</h1>
+<center>
+<img src="RxImgSze.png" alt="RxImgSze" align="top" height="120"
+ width="120">
+<p>RxImgSze: Raster Image Support for Rexx
+</p>
+<p><a href="#License_agreement">Copyright ¸ 2013-2014, Jan-Erik L„rka</a>
+</p>
+<p><a href="http://www.xn-lrka-loa.com/">
+http://www.xn-lrka-loa.com/
+</a></p>
+<p>Raster image libraries, code and routines from
+<br>
+Generalized Bitmap Module (GBM),<br>
+currently maintained by Heiko Nitzsche, Germany.
+</p>
+<p><a href="http://heikon.home.tlink.de/">http://heikon.home.tlink.de/
+</a></p>
+</center>
+<h1>License agreement<br>
+</h1>
+<a name="License_agreement"></a><b>License agreement</b><br>
+<p>Copyright ¸ 2013-2014, Jan-Erik L„rka<br>
+All rights reserved.<br>
+<br>
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:<br>
+<br>
+1. Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.<br>
+<br>
+2. Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.<br>
+<br>
+3. Neither the name of "Jan-Erik L„rka" nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.<br>
+<br>
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+<h1>
+Installation
+</h1>
+<a name="Installation"></a>
+<span style="font-weight: bold;">Installation</span>
+<p><br>
+Unpack files and place the .dll file in
+<a href="c:%5Cecs%5Cdll">C:\ecs\dll
+</a> or <a href="C:%5COS2%5CDLL">C:\OS2\DLL
+</a> and this help file in <a href="C:%5Cecs%5Cbook">C:\ecs\book
+</a> or <a href="C:%5Cecs%5Cbook">C:\OS2\BOOK</a></p>
+<h1>Introduction to REXX
+</h1>
+<a name="Introduction_to_REXX"></a><span style="font-weight: bold;">Introduction
+to REXX</span><br>
+<p>REXX extend what you can do with your computer.
+</p>
+<p>Classic REXX that ship with eComStation and OS/2 allow you to write
+straight forward code in english with few obstacles as rules formatting
+requirements that may exist in other similar languages.
+</p>
+<p>The REXX language allow for various programming styles depending on
+your personal preference, which may confuse, but also allow you to
+explore
+it and try more.
+</p>
+<p>Absolute beginners to REXX programming should read one of the REXX
+introduction
+tutorials available.
+</p>
+<p>You can with relatively little knowledge extend REXX if it doesn't
+contain
+all the components you need. This library is an example of how you can
+add functionallity to extend REXX beyond the original implementation.
+</p>
+<h2>Help to write REXX code</h2>
+<a name="Help_to_write_REXX_code"></a><b>Help to write REXX code</b>
+<p><br>
+You can write REXX code with a plain
+<a href="e.exe">Text Editor
+</a></p>
+<p>Editors with support for programming lanuages usually contain
+various
+functions to highlight different parts of the code to inform you about
+various aspects of the code and help you understand it better.
+</p>
+<p><b>
+Example of Syntax Highlightning
+</b><br>
+<b>
+<font color="#999900">/*
+</font></b><br>
+<b>
+<font color="#999900">&nbsp; * Filename: Example.cmd
+</font></b><br>
+<b>
+<font color="#999900">&nbsp; * Author: JAN-ERIK
+</font></b><br>
+<b>
+<font color="#999900">&nbsp; * Created: Sat Mar 22 2014
+</font></b><br>
+<b>
+<font color="#999900">&nbsp; * Purpose: Introductional example script
+to REXX
+</font></b><br>
+<b>
+<font color="#999900">&nbsp; * Changes:
+</font></b><br>
+<b>
+<font color="#999900">&nbsp; */
+</font></b></p>
+<p><b>
+<font color="#000099">SAY
+</font><font color="#009900">"Example
+of Syntax highlightning"
+</font></b>&nbsp;
+</p>
+<p><b>
+Examples of Text Editors with Syntax Highlightning
+</b></p>
+<p><a href="#EPM_Enhanced_Editor_">
+EPM (Enhanced Editor)
+</a></p>
+<p><a href="#FTE_Folding_Text_Editor_">
+FTE (Folding Text Editor)
+</a></p>
+<h2>EPM (Enhanced Editor)</h2>
+<a name="EPM_Enhanced_Editor"></a><b>EPM (Enhanced Editor)</b>
+<p><a href="epm.exe">EPM (Enhanced Editor)</a> that ships with OS/2 and
+eComstation is very
+powerful and support various progamming languages, not only REXX. EPM
+may not look that powerful at a first glance if you haven't tried it
+out before. You can however add buttons to the buttonbar of the EPM
+that add support for syntax highlightning with little effort.<br>
+&nbsp;
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Buttonbar: </td>
+      <td>Right click </td>
+    </tr>
+    <tr>
+      <td>Select: </td>
+      <td>Buffet </td>
+    </tr>
+    <tr>
+      <td>Window: </td>
+      <td>Toolbar customization </td>
+    </tr>
+    <tr>
+      <td>Area: </td>
+      <td>Buffet toolbar: </td>
+    </tr>
+    <tr>
+      <td>Click: </td>
+      <td>&gt; (Right most button) </td>
+    </tr>
+    <tr>
+      <td>Button: </td>
+      <td>[&nbsp; KwdHilit&nbsp; ] </td>
+    </tr>
+    <tr>
+      <td>Drag &amp; Dropû: </td>
+      <td>KwdHilit </td>
+    </tr>
+    <tr>
+      <td>Target: </td>
+      <td>Current toolbar: </td>
+    </tr>
+    <tr>
+      <td>Button: </td>
+      <td>[ OK ] </td>
+    </tr>
+    <tr>
+      <td>Window: </td>
+      <td>EPM main window </td>
+    </tr>
+    <tr>
+      <td>Buttonbar: </td>
+      <td>Right click </td>
+    </tr>
+    <tr>
+      <td>Menu: </td>
+      <td>Save as... </td>
+    </tr>
+    <tr>
+      <td>Window: </td>
+      <td>Save Toolbar </td>
+    </tr>
+    <tr>
+      <td>Field: </td>
+      <td>Enter a name for the toolbar. </td>
+    </tr>
+    <tr>
+      <td>Type: </td>
+      <td>Highlight </td>
+    </tr>
+    <tr>
+      <td>Window: </td>
+      <td>EPM main window </td>
+    </tr>
+    <tr>
+      <td>Menu: </td>
+      <td><u>O</u>ptions &#8594; P<span style="text-decoration: underline;">r</span>eferences
+&#8594; <u>S</u>ettings... </td>
+    </tr>
+    <tr>
+      <td>Window: </td>
+      <td>Settings </td>
+    </tr>
+    <tr>
+      <td>Tab: </td>
+      <td>Toolbars </td>
+    </tr>
+    <tr>
+      <td>Grouping area: </td>
+      <td>Toolbars </td>
+    </tr>
+    <tr>
+      <td>Dropdown: </td>
+      <td>Highlight </td>
+    </tr>
+    <tr>
+      <td>Button: </td>
+      <td>[ Make current ] </td>
+    </tr>
+    <tr>
+      <td>Close window: </td>
+      <td>Settings </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+û) Drag &amp; Drop with the Right Mouse Button
+<h2>FTE (Folding Text Editor)
+</h2>
+<a name="FTE_Folding_Text_Editor"></a><b>FTE (Folding Text
+Editor)
+</b>
+<p>Various versions of FTE (Folding Text Editor) exist on the internet
+and they provide good support for REXX.
+</p>
+<p>Syntax Highlightning, automatic Indention to ease reading and
+debuggning
+of code, menus to insert comments and useful commands within the
+languages
+make FTE very useful.
+</p>
+<p><span style="font-weight: bold;">Note</span>
+</p>
+<p>A drawback with some versions of FTE is that the folding of END in
+DO-END
+pair sections loose track of position and in default configuration with
+OS/2 version doesn't line up right below DO.
+</p>
+<p><b>
+<font color="#000099">IF ARG
+</font><font color="#339999">(
+</font><font color="#990000">1
+</font><font color="#339999">)
+=
+</font><font color="#990000">1
+</font><font color="#339999">THEN
+</font></b><br>
+<b>
+<font color="#000099">DO
+</font></b><br>
+&nbsp;&nbsp;&nbsp; <b><font color="#000099">SAY
+</font><font color="#009900">'Please
+wait...'
+</font></b><br>
+&nbsp;&nbsp;&nbsp; <b><font color="#000099">CALL
+</font><font color="#339999">SysSleep
+</font><font color="#990000">10
+</font></b><br>
+&nbsp;&nbsp;&nbsp; <b><font color="#339999">END
+</font></b></p>
+<p>instead of</p>
+<p><b><font color="#000099">IF ARG
+</font><font color="#339999">(
+</font><font color="#990000">1
+</font><font color="#339999">)
+=
+</font><font color="#990000">1
+</font><font color="#339999">THEN
+</font></b><br>
+<b>
+<font color="#000099">DO
+</font></b><br>
+&nbsp;&nbsp;&nbsp; <b><font color="#000099">SAY
+</font><font color="#009900">'Please
+wait...'
+</font></b><br>
+&nbsp;&nbsp;&nbsp; <b><font color="#000099">CALL
+</font><font color="#339999">SysSleep
+</font><font color="#990000">10
+</font></b><br>
+<b>
+<font color="#339999">END</font></b></p>
+<p>Internet resources for FTE (Folding Text Editor):
+</p>
+<p><a href="http://www.os2site.com/sw/apps/editors/fte/index.html">
+http://www.os2site.com/sw/apps/editors/fte/index.html
+</a><br>
+<a
+ href="http://hobbes.nmsu.edu/h-search.php?key=FTE+Editor&amp;pushbutton=Search">
+http://hobbes.nmsu.edu/h-search.php?key=FTE+Editor&amp;pushbutton=Search
+</a>
+</p>
+<h1>Introduction to RxImgSze
+</h1>
+<a name="Introduction_to_RxImgSze"></a><b>Introduction to RxImgSze
+</b>
+<ul>
+  <li>Display Info about Image </li>
+  <li>Increase Colors in Image </li>
+  <li>Reduce Colors in Image </li>
+  <li>Resize Image </li>
+  <li>Capture a Window </li>
+  <li>Capture the Desktop </li>
+  <li>Capture a Window interior </li>
+  <li>Capture parts of the Desktop/Window </li>
+</ul>
+<p>
+<br>
+The design of external function packages allow the programmer to
+add code to dynamically handle various needs in just i functions. This
+has been explored as much as possible in this library and require you
+as
+a reader to pay attention to the subtle differences between the
+provided
+examples.
+&nbsp;
+</p>
+<p><b>Library functions</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <a href="#rxImgLoadFuncs">rxImgLoadFuncs </a></td>
+      <td>- </td>
+      <td>Load all other functions in the library </td>
+    </tr>
+    <tr>
+      <td> <a href="#rxImgDropFuncs">rxImgDropFuncs </a></td>
+      <td>- </td>
+      <td>Unload all other functions in the library </td>
+    </tr>
+    <tr>
+      <td> <a href="#rxImgVersion">rxImgVersion </a></td>
+      <td>- </td>
+      <td>Show information for this library </td>
+    </tr>
+    <tr>
+      <td> <a href="#rxImgReSize">rxImgReSize </a></td>
+      <td>- </td>
+      <td>Resize and reduce/increase colors in image </td>
+    </tr>
+    <tr>
+      <td> <a href="#rxImgCapture">rxImgCapture </a></td>
+      <td>- </td>
+      <td>Capture image </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<h2>rxImgLoadFuncs</h2>
+<a name="rxImgLoadFuncs"></a><span style="font-weight: bold;">rxImgLoadFuncs</span><br>
+&nbsp;&nbsp; &nbsp;<br>
+Syntax:&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; CALL rxImgLoadFuncs
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="font-weight: bold; font-style: italic;">Parameter(s) </td>
+      <td style="font-weight: bold; font-style: italic;">Returns/Note </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>empty string </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Purpose:</td>
+      <td>Load all functions for usage so
+that they are available in the REXX script</td>
+    </tr>
+  </tbody>
+</table>
+<span style="font-style: italic;"><br>
+Example</span><br>
+<span style="font-weight: bold;"><span style="color: rgb(0, 0, 153);">CALL</span>
+<span style="color: rgb(51, 153, 153);">RxFuncAdd</span> <span
+ style="color: rgb(0, 153, 0);">'rxImgLoadFuncs'</span><span
+ style="color: rgb(51, 153, 153);">,</span> <span
+ style="color: rgb(0, 153, 0);">'rxImgSze'</span><span
+ style="color: rgb(51, 153, 153);">,</span> <span
+ style="color: rgb(0, 153, 0);">'rxImgLoadFuncs'</span></span><br
+ style="font-weight: bold;">
+<span style="font-weight: bold;"><span style="color: rgb(0, 0, 153);">CALL</span>
+<span style="color: rgb(51, 153, 153);">rxImgLoadFuncs</span></span><br>
+<h2>rxImgDropFuncs</h2>
+<a name="rxImgDropFuncs"></a><span style="font-weight: bold;">rxImgDropFuncs</span><br>
+&nbsp;&nbsp;&nbsp; <br>
+Syntax:&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; CALL rxImgDropFuncs
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="font-weight: bold; font-style: italic;">Parameter(s) </td>
+      <td style="font-weight: bold; font-style: italic;">Returns/Note </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>empty string </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Purpose:</td>
+      <td>Unload all previously loaded
+functions when done</td>
+    </tr>
+  </tbody>
+</table>
+<h2>rxImgVersion</h2>
+<a style="font-weight: bold;" name="rxImgVersion">
+</a><span style="font-weight: bold;">rxImgVersion</span><br>
+<br>
+Syntax:&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; result = rxImgVersion( [information] )
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="font-weight: bold; font-style: italic;">Parameter(s) </td>
+      <td style="font-weight: bold; font-style: italic;">Returns/Note </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>information </b></td>
+      <td> <i>(Optional) </i></td>
+    </tr>
+    <tr>
+      <td>none&nbsp; </td>
+      <td>"rxImgSize: version 1.03, GBM:
+version
+1.12" </td>
+    </tr>
+    <tr>
+      <td>"RxImageSize"&nbsp; </td>
+      <td>"1.03" </td>
+    </tr>
+    <tr>
+      <td>"GBM"&nbsp; </td>
+      <td>"1.12" </td>
+    </tr>
+    <tr>
+      <td> "Filters" </td>
+      <td>"nearestneighbor, bilinear,
+bell, bspline,
+..." </td>
+    </tr>
+    <tr>
+      <td> "Palettes" </td>
+      <td>"BW, VGA, 8B, 4G, 7x8x4, 6x6x6,
+4x4x4,
+..." </td>
+    </tr>
+    <tr>
+      <td> "Extra" </td>
+      <td>"ASPECT, ERRDIFF, HALFTONE" </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Purpose: </td>
+      <td>Return information about this
+library
+and capabilities. </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Note: </td>
+      <td>Only the first letter (if any)
+has to
+be specified. </td>
+    </tr>
+  </tbody>
+</table>
+<p>
+<i>Example 1
+</i><br>
+<b>
+<font color="#000099">SAY
+</font><font color="#339999">rxImgVersion()</font>
+</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Get general information </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>rxImgSize: version 1.03, GBM:
+version
+1.12 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><span style="font-style: italic;">Example 2</span>
+<br>
+<b>
+<font color="#000099">SAY
+</font><font color="#339999">rxImgVersion(
+</font><font color="#009900">'R'
+</font><font color="#339999">)</font>
+</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Get information about the rexx library </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>1.03 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<h2>rxImgReSize</h2>
+<a name="rxImgReSize">
+</a><span style="font-weight: bold;">rxImgReSize</span><br>
+<br>
+Syntax:&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; result = rxImgReSize( input_image[, output_image,
+[width], [height], [options][, palette_file] ] )
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="font-weight: bold; font-style: italic;">Parameter(s)</td>
+      <td style="font-weight: bold; font-style: italic;">Return/Note</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>input_image </b></td>
+      <td style="font-style: italic;">(Mandatory) </td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>"Syntax: rc = rxImgReSize( Source_path_and_filename..." </td>
+    </tr>
+    <tr>
+      <td>"C:\nofile.xyz" </td>
+      <td>"2" </td>
+    </tr>
+    <tr>
+      <td>"C:\GMARBLE.BMP" </td>
+      <td>"179 179 8" A valid filename and no other parameters </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>output_image </b></td>
+      <td style="font-style: italic;">(Optional)</td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>Will use the input file for output e.g. overwrite it. </td>
+    </tr>
+    <tr>
+      <td>"C:\nofile.xyz" </td>
+      <td>"11" for unknown filetype etc. </td>
+    </tr>
+    <tr>
+      <td>"C:\OUT.BMP" </td>
+      <td>Will write the file if it's a valid image format </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>width </b></td>
+      <td style="font-style: italic;">(Optional)</td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>keep width (unless ASPECT in parameter options) </td>
+    </tr>
+    <tr>
+      <td>120 </td>
+      <td>Resize image to 120 pixels wide </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>height </b></td>
+      <td><i>(Optional)</i></td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>keep height (unless ASPECT in parameter options) </td>
+    </tr>
+    <tr>
+      <td>120 </td>
+      <td>Resize image to 120 pixels high </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>options </b></td>
+      <td style="font-style: italic;">(Optional)</td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>- </td>
+    </tr>
+    <tr>
+      <td>"nearestneighbor" </td>
+      <td>Use the filter nearestneighbor during resize </td>
+    </tr>
+    <tr>
+      <td>"7x8x4" </td>
+      <td>See <a href="#rxImgVersion">Palettes</a></td>
+    </tr>
+    <tr>
+      <td>"1bpp" </td>
+      <td>See also the parameter palette_file below<a
+ href="#palette_file"> </a></td>
+    </tr>
+    <tr>
+      <td>"ASPECT" </td>
+      <td> See <a href="#rxImgVersion">Aspect</a></td>
+    </tr>
+    <tr>
+      <td>"ERRDIFF" </td>
+      <td> See <a href="#rxImgVersion">Extra</a></td>
+    </tr>
+    <tr>
+      <td>"HALFTONE" </td>
+      <td> See <a href="RxImgSze_mixed.html#rxImgVersion">Extra</a><a
+ href="#rxImgVersion"> </a></td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>palette_file </b></td>
+      <td><i>(Required only with option
+1bpp, 4bpp
+&amp; 8bpp)</i></td>
+    </tr>
+    <tr>
+      <td>"C:\PaletteFile.xyz" </td>
+      <td>- </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Purpose: </td>
+      <td>Copy and/or resize image, reduce or increase colors of image </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Note: </td>
+      <td>A return value of 0 indicate "no problem" while other integer</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>values indicate various problems depending on input</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Extra note:<br>
+      </td>
+      <td style="vertical-align: top;">Pay attention to the special
+case when you only provide the path<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">and file name to a valid image.
+The return value is then<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">width height color_depth<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><i>
+Example 1
+</i><br>
+<b>
+<font color="#000099">SAY
+</font><font color="#339999">rxImgReSize(
+</font><font color="#009900">"C:\OS2\BITMAP\GMARBLE.BMP"
+</font><font color="#339999">)</font>
+</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Get information about width, height and color depth of image </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>179 179 8 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 2
+</i><br>
+<b>
+<font color="#000099">SAY </font><font color="#339999">RxImgReSize(
+</font><font color="#006600">"C:\OS2\BITMAP\GMARBLE.BMP"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\GMARBLE.GIF"
+</font><font color="#339999">)</font>
+</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Copy image and save the converted image as GIF </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 3
+</i><br>
+<b>
+<font color="#000099">SAY </font><font color="#339999">RxImgReSize(
+</font><font color="#006600">"C:\OS2\BITMAP\GMARBLE.BMP"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\GMARBLE.GIF"
+</font><font color="#339999">,
+</font><font color="#990000">120
+</font><font color="#339999">)</font>
+</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Copy image, resize width to 120 pixels and keep height </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>Save the converted image as GIF</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 4
+</i><br>
+<b>
+<font color="#000099">SAY </font><font color="#339999">RxImgReSize(
+</font><font color="#006600">"C:\OS2\BITMAP\GMARBLE.BMP"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\GMARBLE.JPG"
+</font><font color="#339999">,,&nbsp;</font></b><b><font color="#990000">
+150</font></b><b><font color="#339999">
+</font><font color="#339999">)</font></b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Copy image, resize height to 150 pixels high and keep width </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>Save the converted image as JPG</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 5
+</i><br>
+<b>
+<font color="#000099">SAY
+</font><font color="#339999">rxImgReSize(
+</font><font color="#006600">"C:\OS2\BITMAP\GMARBLE.BMP"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\GMARBLE.PNG"
+</font><font color="#339999">,,
+</font><font color="#990000">200
+</font><font color="#339999">,
+</font><font color="#009900">"ASPECT"
+</font><font color="#339999">)</font>
+</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Copy image, resize to 200 pixels high but keep aspect ratio
+between width and height </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>Save the converted image as PNG</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 6
+</i><br>
+<b>
+<font color="#000066">SAY
+</font><font color="#339999">rxImgReSize(
+</font><font color="#006600">"C:\OS2\BITMAP\GMARBLE.BMP"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\GMARBLE2.GIF"
+</font><font color="#339999">,
+</font><font color="#660000">80
+</font><font color="#339999">,,
+</font><font color="#006600">"GAUSSIAN 6x6x6 ERRDIFF"
+</font><font color="#339999">)</font>
+</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Purpose: </td>
+      <td>Copy image, resize width to 80 pixels wide but keep height </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>Use Gaussian filter during quality scale, reduce the colors
+with</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> palette 6x6x6 and error diffusion and save the converted
+image as GIF</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 7
+</i><br>
+<b>
+<font color="#000066">SAY
+</font><font color="#339999">rxImgReSize(
+</font><font color="#006600">"C:\OS2\BITMAP\GMARBLE.BMP"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\GMARBLE2.BMP"</font><font
+ color="#339999">,
+</font><font color="#990000">350
+</font><font color="#339999">,,
+</font><font color="#006600">"ASPECT 256"<span
+ style="color: rgb(51, 153, 153);"> )</span>
+</font></b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Copy image, resize width to 350
+pixels
+wide and keep aspect ratio between width and height </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>Reduce colors to maxium
+of 256 colors and save the converted image as BMP</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 8
+</i><br>
+<b>
+<font color="#000066">SAY
+</font><font color="#339999">rxImgReSize(
+</font><font color="#006600">"C:\OS2\BITMAP\GMARBLE.BMP"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\GMARBLE2.PNG"
+</font><font color="#339999">,,
+</font><font color="#990000">500</font></b><b><font color="#339999">,</font></b><b><font
+ color="#990000">
+</font><font color="#006600">"HALFTONE KAISER
+RGB"
+</font><font color="#339999">)
+</font></b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Copy image, resize width to 500 pixels and keep height </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>Use Kaiser filter during halftone quality scale and save the
+converted image as PNG</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 9
+</i><br>
+<b>
+<font color="#000066">SAY
+</font><font color="#339999">rxImgReSize(
+</font><font color="#006600">"C:\OS2\BITMAP\GMARBLE.BMP"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\GMARBLE3.BMP"
+</font><font color="#339999">,,
+</font><font color="#660000">250</font><font color="#339999">,
+</font><font color="#006600">"4bpp"</font><font color="#339999">,
+</font><font color="#006600">"C:\Palfile.xyz"
+</font><font color="#339999">)
+</font></b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Copy image, resize height to 250 pixels and keep width </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>Reduce colors to 4 bit (16 colors) with the use of a palette
+file and save the converted image as BMP</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<h2>rxImgCapture</h2>
+<a name="rxImgCapture">
+</a><span style="font-weight: bold;">rxImgCapture</span><br>
+<br>
+Syntax:&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; result = rxImgCapture(
+window_name[, left_coordinate[, bottom_coordinate[, right_coordinate[,
+top_coordinate[, save_as_path_and_filename ] ] ] ] ] )
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+result = rxImgCapture( window_name[, "INTERIOR"/"WINDOW"][,
+left_coordinate[, bottom_coordinate[, right_coordinate[,
+top_coordinate[, save_as_path_and_filename ] ] ] ] ] )
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+result = rxImgCapture( window_name[, "INTERIOR"/"WINDOW"][,
+save_as_path_and_filename ] )<br>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="font-weight: bold; font-style: italic;">Parameter(s) </td>
+      <td style="font-weight: bold; font-style: italic;">Return/Note </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>window_name </b></td>
+      <td style="font-style: italic;">(Mandatory)</td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>"22" </td>
+    </tr>
+    <tr>
+      <td>"DESKTOP" </td>
+      <td>"0" </td>
+    </tr>
+    <tr>
+      <td>"Editor" </td>
+      <td>Will capture a window with the title name "Editor" or </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>if none with just that name a window that contain the text
+"Editor" in the title</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>"INTERIOR" </b></td>
+      <td style="font-style: italic;">(Optional)</td>
+    </tr>
+    <tr>
+      <td>"INTERIOR" </td>
+      <td>Will capture the interior of the window instead of the full
+frame </td>
+    </tr>
+    <tr>
+      <td>"WINDOW" </td>
+      <td>Will capture the whole size of the window (default) </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>left_coordinate </b></td>
+      <td style="font-style: italic;">(Optional)</td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>start 0 pixels in of specified window </td>
+    </tr>
+    <tr>
+      <td>10l </td>
+      <td>start 10 pixles from left of specified window </td>
+    </tr>
+    <tr>
+      <td>10x </td>
+      <td>start 10 pixels from left of specified window </td>
+    </tr>
+    <tr>
+      <td>10% </td>
+      <td>start 10% in from the left of specified window (parameter
+position is important) </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>bottom_coordinate </b></td>
+      <td style="font-style: italic;">(Optional)</td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>start 0 pixels in of specified window </td>
+    </tr>
+    <tr>
+      <td>12b </td>
+      <td>start 12 pixles from bottom of specified window </td>
+    </tr>
+    <tr>
+      <td>12x </td>
+      <td>start 12 pixels from bottom of specified window </td>
+    </tr>
+    <tr>
+      <td>12% </td>
+      <td>start 12% in from the bottom of specified window (parameter
+position is important) </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>right_coordinate </b></td>
+      <td><i>(Optional)</i></td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>start 0 pixels in of specified window </td>
+    </tr>
+    <tr>
+      <td>14r </td>
+      <td>start 14 pixles from right of specified window </td>
+    </tr>
+    <tr>
+      <td>14w </td>
+      <td>14 pixels wide image </td>
+    </tr>
+    <tr>
+      <td>14% </td>
+      <td>14% wide image of specified window (parameter position is
+important) </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>top_coordinate </b></td>
+      <td><i>(Optional)</i></td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>start 0 pixels in of specified window </td>
+    </tr>
+    <tr>
+      <td>16t </td>
+      <td>start 16 pixles from top of specified window </td>
+    </tr>
+    <tr>
+      <td>16h </td>
+      <td>16 pixels high image </td>
+    </tr>
+    <tr>
+      <td>16% </td>
+      <td>16% high image of specified window (parameter position is
+important) </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td> <b>save_as_path_filename </b></td>
+      <td><i>(Optional)</i></td>
+    </tr>
+    <tr>
+      <td>none </td>
+      <td>defaults to "temporary.bmp" in the current directory </td>
+    </tr>
+    <tr>
+      <td>"C:\Captured.PNG" </td>
+      <td>Saves the captured image as Captured.PNG in C: </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Purpose: </td>
+      <td>Capture whole or part of the screen and save as image </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Note: </td>
+      <td>This function is very "dynamic" and only the first and last
+parameter has fixed positions. </td>
+    </tr>
+  </tbody>
+</table>
+<p>
+<i>Example 1
+</i><br>
+<b>
+<font color="#000066">SAY
+</font><font color="#339999">rxImgCapture(
+</font><font color="#006600">"DESKTOP"
+</font><font color="#339999">)</font>
+</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Capture the whole desktop and save as "temporary.bmp" in the
+current folder </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 2
+</i><br>
+<b>
+<font color="#000066">SAY
+</font><font color="#339999">rxImgCapture(
+</font><font color="#006600">"DESKTOP"
+</font><font color="#339999">,
+</font><font color="#006600">"100b"
+</font><font color="#339999">,
+</font><font color="#006600">"50x"
+</font><font color="#339999">,
+</font><font color="#006600">"50%"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\Capture1.bmp"
+</font><font color="#339999">)</font>
+</b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Capture parts of the desktop and mix values, save to
+"C:\Capture1.bmp" </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p><i>
+Example 3
+</i><br>
+<b>
+<font color="#000066">SAY
+</font><font color="#339999">rxImgCapture(
+</font><font color="#006600">"Firefox"
+</font><font color="#339999">,
+</font><font color="#006600">"interior"
+</font><font color="#339999">,
+</font><font color="#006600">"150t"
+</font><font color="#339999">,
+</font><font color="#006600">"C:\Firefox.png"</font><font
+ color="#339999"> )
+</font></b>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td>Purpose: </td>
+      <td>Capture interior of window that contain the name Firefox, </td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td>avoid the toolbar buttons at the top and save to
+"C:\Firefox.png"</td>
+    </tr>
+    <tr>
+      <td> <br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td>Output: </td>
+      <td>0 </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+</body>
+</html>

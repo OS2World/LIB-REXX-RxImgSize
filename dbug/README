@@ -1,0 +1,46 @@
+=== DBUG ===
+Helper application to debug your own library for rexx.
+
+1 Compile
+======
+
+1.a Prerequisite
+______
+OpenWatcom 1.x
+
+1.b dbug.exe
+______
+Use OpenWatcom IDE
+Open the project file dbug.wpj
+You can open dbug.cpp to see the code
+Compile (debugging has been set in the project)
+
+2 Usage 
+======
+
+2.a Prerequisite
+______
+Rexx library (.dll) that has been compiled with OpenWatcom with debugging set
+Rexx script to load and test the capabilities of the library
+
+2.b dbug.exe
+______
+Open a Command Prompt (Window)
+Change directory to where you've placed the script, dbug.exe and the rexx library to test
+Type "wdw dbug <script_name>" (where <script_name> is the name of your script, without "
+and the OpenWatcom debugger will start and begin with the main procedure of dbug.exe
+Use Break
+On Image  Load... to select the .dll-library file
+Run once to go to the part where the script actually load the .dll-library file
+Press F10 to step over each row of code and F8 to jump into functions etc. 
+
+See documentation and help for wdw for more in depth help
+
+3 Example of Usage
+======
+
+3.a RxImgSze
+_______
+wdw dbug TestRxImgSze
+
+Remember to copy dbug.exe to the folder where you place the library and script!

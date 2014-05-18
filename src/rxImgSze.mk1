@@ -1,0 +1,44 @@
+!define BLANK ""
+D:\HOME\RxImgSze\src\rxImgInf.obj : D:\HOME\RxImgSze\src\rxImgInf.cpp .AUTOD&
+EPEND
+ @D:
+ cd D:\HOME\RxImgSze\src
+ *wpp386 rxImgInf.cpp -i=D:\Program\OPENWATCOM\h;D:\Program\OPENWATCOM\h\os2&
+;D:\PROGRAM\gbmos2pm_gbm_gbmplugins.src\gbm -w0 -e25 -sg -d+ -ei -zq -otexan&
+ -of -bd -bm -6r -bt=os2 -fo=.obj -mf -xd -xr
+
+D:\HOME\RxImgSze\src\var.obj : D:\HOME\RxImgSze\src\var.cpp .AUTODEPEND
+ @D:
+ cd D:\HOME\RxImgSze\src
+ *wpp386 var.cpp -i=D:\Program\OPENWATCOM\h;D:\Program\OPENWATCOM\h\os2;D:\P&
+ROGRAM\gbmos2pm_gbm_gbmplugins.src\gbm -w0 -e25 -sg -d+ -ei -zq -otexan -of &
+-bd -bm -6r -bt=os2 -fo=.obj -mf -xd -xr
+
+D:\HOME\RxImgSze\src\RxImgSize.res : D:\HOME\RxImgSze\src\RxImgSize.Rc .AUTO&
+DEPEND
+ @D:
+ cd D:\HOME\RxImgSze\src
+ *rc -i $[: -i D:\Program\OPENWATCOM\h -i D:\Program\OPENWATCOM\h\os2 -r RxI&
+mgSize.rc RxImgSize.res
+
+D:\HOME\RxImgSze\src\rxImgSze.dll : D:\HOME\RxImgSze\src\rxImgInf.obj D:\HOM&
+E\RxImgSze\src\var.obj D:\HOME\RxImgSze\src\RxImgData.hpp D:\HOME\RxImgSze\s&
+rc\var.hpp D:\HOME\RxImgSze\src\RxImgSize.res .AUTODEPEND
+ @D:
+ cd D:\HOME\RxImgSze\src
+ @%write rxImgSze.lk1 FIL rxImgInf.obj,var.obj
+ @%append rxImgSze.lk1 
+!ifneq BLANK ""
+ *wlib -q -n -b rxImgSze.imp 
+ @%append rxImgSze.lk1 LIBR rxImgSze.imp
+!endif
+ *wlink name rxImgSze d all sys os2v2 dll initi termi libp D:\PROGRAM\gbmos2&
+pm_gbm_gbmplugins.src\gbm libr gbm.lib,gbmmem.lib,gbmscale.lib,gbmmthrd.lib,&
+gbmtrunc.lib,gbmht.lib,gbmhist.lib,gbmmcut.lib,gbmerr.lib op maxe=25 op q op&
+ many op el @rxImgSze.lk1
+!ifneq BLANK "RxImgSize.res"
+ rc -i $[: -i D:\Program\OPENWATCOM\h -i D:\Program\OPENWATCOM\h\os2 RxImgSi&
+ze.res rxImgSze.dll
+!endif
+ wlib -q -n -b rxImgSze.lib +rxImgSze.dll
+

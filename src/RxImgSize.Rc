@@ -1,0 +1,24 @@
+
+/* OS/2 Warp Resource Script File - Created by Integrated Resource Editor */
+
+#define INCL_WINSYS
+#define INCL_WINBIDI
+#define INCL_WINSTDDLGS
+#define INCL_WINSTDSPIN
+#define INCL_NLS
+#define INCL_SW
+
+#include <os2.h>
+
+#include "rximgsize.h"
+
+DEFAULTICON  "D:\\HOME\\RxImgSze\\src\\RxImgSze.ico"
+ICON        Folder "D:\\HOME\\RxImgSze\\src\\MonaLisa Folder.ICO"
+ICON        OpenFolder "D:\\HOME\\RxImgSze\\src\\MonaLisa Folder Open.ICO"
+POINTER     PTR_SELECT "D:\\HOME\\RxImgSze\\src\\Select.PTR"
+
+STRINGTABLE MOVEABLE DISCARDABLE
+BEGIN
+    CopyRights,                    "¸Jan-Erik L„rka, 2013-2014"
+    Version,                         "1.03"
+END

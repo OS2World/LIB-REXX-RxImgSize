@@ -1,0 +1,22 @@
+!define BLANK ""
+D:\HOME\RxImgSze\dbug\dbug.obj : D:\HOME\RxImgSze\dbug\dbug.cpp .AUTODEPEND
+ @D:
+ cd D:\HOME\RxImgSze\dbug
+ *wpp386 dbug.cpp -i="D:\Program\OPENWATCOM/h;D:\Program\OPENWATCOM/h/os2" -&
+w4 -e25 -zq -od -d2 -bm -6r -bt=os2 -fo=.obj -mf -xs -xr
+
+D:\HOME\RxImgSze\dbug\dbug.exe : D:\HOME\RxImgSze\dbug\dbug.obj .AUTODEPEND
+ @D:
+ cd D:\HOME\RxImgSze\dbug
+ @%write dbug.lk1 FIL dbug.obj
+ @%append dbug.lk1 
+!ifneq BLANK ""
+ *wlib -q -n -b dbug.imp 
+ @%append dbug.lk1 LIBR dbug.imp
+!endif
+ *wlink name dbug d all sys os2v2 op m op maxe=25 op q op symf @dbug.lk1
+!ifneq BLANK ""
+ rc -i $[: -i D:\Program\OPENWATCOM\h -i D:\Program\OPENWATCOM\h\os2  dbug.e&
+xe
+!endif
+
